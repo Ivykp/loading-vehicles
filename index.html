@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Reading Excel File</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body ng-app="app">
+  <div ng-controller="parseFile">
+    <input type="file" name="myFile" value="" custom-on-change="fileChanged">
+    <button ng-click="readFile()">Read file</button>
+    <div ng-if="result">
+      <ul>
+        <li ng-repeat="obj in keys">
+          {{obj}}
+          <select ng-model="data.model[obj]">
+            <option ng-repeat="key in schemaKeys" value="{{key}}">{{key}}</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+
+    <div ng-if="result">
+      <pre>{{data.model | json }}</pre>
+    </div>
+
+    <button ng-click="generate()">Generate object</button>
+  </div>
+
+  
+  <script src="libs/xlsx.full.min.js"></script>
+  <script src="libs/angular.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
